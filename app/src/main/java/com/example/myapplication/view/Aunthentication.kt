@@ -125,8 +125,7 @@ fun RegisterScreen(viewModel: AuthViewModel = viewModel(),
 
 ) {
     var username by remember { mutableStateOf("") }
-    var firstName by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
+
     var email by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -165,34 +164,6 @@ fun RegisterScreen(viewModel: AuthViewModel = viewModel(),
             OutlinedTextField(
                 value = username,
                 onValueChange = { username = it },
-                placeholder = { Text("Имя", color = Color(0x41000000)) },
-                label = { Text("Имя пользователя") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 30.dp),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedLabelColor = Color.Transparent,
-                    unfocusedBorderColor = Color(102, 90, 240, 255)
-                )
-            )
-            OutlinedTextField(
-                value = firstName,
-                onValueChange = { firstName = it },
-                placeholder = { Text("Имя", color = Color(0x41000000)) },
-                label = { Text("Имя пользователя") },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 30.dp),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedLabelColor = Color.Transparent,
-                    unfocusedBorderColor = Color(102, 90, 240, 255)
-                )
-            )
-            OutlinedTextField(
-                value = lastName,
-                onValueChange = { lastName = it },
                 placeholder = { Text("Имя", color = Color(0x41000000)) },
                 label = { Text("Имя пользователя") },
                 modifier = Modifier
@@ -272,15 +243,16 @@ fun RegisterScreen(viewModel: AuthViewModel = viewModel(),
                 onClick = {
                     viewModel.register(
                         username = username,
-                        firstName = firstName,
-                        lastName = lastName,
                         email = email,
                         phoneNumber = phoneNumber,
                         password = password,
                         confirmPassword = confirmPassword
                     )
                 },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier .fillMaxWidth()
+                    .height(50.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(102, 90, 240, 255)),
+                shape = MaterialTheme.shapes.medium,
                 enabled = authState !is AuthViewModel.AuthState.Loading
             ) {
                 if (authState is AuthViewModel.AuthState.Loading) {

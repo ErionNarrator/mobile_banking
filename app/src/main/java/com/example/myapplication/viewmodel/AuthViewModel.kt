@@ -27,8 +27,6 @@ class AuthViewModel : ViewModel() {
 
     fun register(
         username: String,
-        firstName: String,
-        lastName: String,
         email: String,
         phoneNumber: String,
         password: String,
@@ -40,8 +38,6 @@ class AuthViewModel : ViewModel() {
                 val response = ApiClient.apiService.register(
                     RegisterRequest(
                         username = username,
-                        firstName = firstName,
-                        lastName = lastName,
                         email = email,
                         phoneNumber = phoneNumber,
                         password = password,
