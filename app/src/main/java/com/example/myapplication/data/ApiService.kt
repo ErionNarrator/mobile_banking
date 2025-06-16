@@ -12,8 +12,11 @@ interface ApiService {
     @POST("auth/register/")
     suspend fun register(@Body request: RegisterRequest): Response<AuthResponse>
 
-    @POST("auth/token/")
-    suspend fun login(@Body request: LoginRequest): Response<AuthResponse>
+    @POST("auth/login/")
+    suspend fun login(@Body request: LoginRequest): Response<ProfileLoginResponse>
+
+    @POST("auth/token/refresh/")
+    suspend fun refreshToken(@Body request: RefreshTokenRequest): Response<RefreshTokenResponse>
 
     @GET("profile/")
     suspend fun getProfile(@Header("Authorization") token: String): Response<UserProfileResponse>
