@@ -6,6 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -20,4 +21,10 @@ interface ApiService {
 
     @GET("profile/")
     suspend fun getProfile(@Header("Authorization") token: String): Response<UserProfileResponse>
+
+    @POST("transfer/")
+    suspend fun transfer(@Header("Authorization") token: String, @Body request: TransferRequest): Response<TransferResponse>
+
+    @GET("accounts/search/")
+    suspend fun searchAccounts(@Header("Authorization") token: String, @Query("query") query: String): Response<List<AccountSearchResult>>
 }

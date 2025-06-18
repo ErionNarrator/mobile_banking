@@ -40,4 +40,5 @@ fun Main(){
     val startDestination = "Greeting"
     Navigate(navController,startDestination)
 
+
 }

@@ -61,3 +61,37 @@ data class UserData(
     @SerializedName("username") val username: String,
     @SerializedName("email") val email: String
 )
+
+data class TransferRequest(
+    @SerializedName("recipient_id") val recipientId: Int? = null,
+    @SerializedName("recipient_account_number") val recipientAccountNumber: String? = null,
+    @SerializedName("amount") val amount: Double,
+    @SerializedName("currency_code") val currencyCode: String = "USD",
+    @SerializedName("description") val description: String? = null
+)
+
+data class TransferResponse(
+    @SerializedName("transaction_id") val transactionId: String,
+    @SerializedName("sender") val sender: AccountInfo,
+    @SerializedName("recipient") val recipient: AccountInfo,
+    @SerializedName("amount") val amount: Double,
+    @SerializedName("currency") val currency: CurrencyData,
+    @SerializedName("timestamp") val timestamp: String,
+    @SerializedName("description") val description: String?
+)
+
+data class AccountInfo(
+    @SerializedName("account_number") val accountNumber: String,
+    @SerializedName("user") val user: UserShortInfo
+)
+
+data class UserShortInfo(
+    @SerializedName("username") val username: String,
+    @SerializedName("email") val email: String
+)
+
+data class AccountSearchResult(
+    @SerializedName("id") val id: Int,
+    @SerializedName("account_number") val accountNumber: String,
+    @SerializedName("user") val user: UserShortInfo
+)

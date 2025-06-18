@@ -13,6 +13,7 @@ import com.example.myapplication.view.GreetingB
 import com.example.myapplication.view.HomeScreen
 import com.example.myapplication.view.LoginScreen
 import com.example.myapplication.view.RegisterScreen
+import com.example.myapplication.view.TransferScreen
 import com.example.myapplication.viewmodel.AuthViewModel
 
 
@@ -46,8 +47,29 @@ fun Navigate(
 //                authViewModel = authViewModel
             )
         }
+
         composable("home") {
-            HomeScreen(navController, authViewModel)
+            HomeScreen(
+                onNavigateToTransfer = { navController.navigate("transfer") },
+                onLogout = {
+                    navController.navigate("login") {
+                        popUpTo("home") { inclusive = true }
+                    }
+                },
+                authViewModel = authViewModel,
+                navController = navController
+            )
+        }
+
+            TODO("Отредактировать навигацию с HomeScreen в TransferScreen ")
+        composable("transfer") {
+            TransferScreen(
+                onBack = { navController.popBackStack() },
+                onTransferSuccess = {
+                    navController.popBackStack()
+                },
+                authViewModel = authViewModel
+            )
         }
     }
 }
