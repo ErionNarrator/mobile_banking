@@ -25,6 +25,6 @@ interface ApiService {
     @POST("transfer/")
     suspend fun transfer(@Header("Authorization") token: String, @Body request: TransferRequest): Response<TransferResponse>
 
-    @GET("accounts/search/")
-    suspend fun searchAccounts(@Header("Authorization") token: String, @Query("query") query: String): Response<List<AccountSearchResult>>
+    @GET("api/accounts/search/")
+    suspend fun searchAccounts(@Query("query") query: String, @Header("Authorization") token: String): Response<List<AccountSearchResult>>
 }

@@ -62,11 +62,23 @@ class TransferViewModel(
         }
     }
 
+    private fun fetchUserProfile() {
+        viewModelScope.launch {
+            try {
+                val response = apiService.getProfile("Bearer $authToken")
+                if (response.isSuccessful) {
+
+                }
+            } catch (e: Exception) {
+            }
+        }
+    }
+
     fun transfer(
         recipientId: Int?,
         recipientAccountNumber: String?,
         amount: Double,
-        currencyCode: String,
+        currencyCode: String, // Принимаем код валюты (USD, EUR и т.д.)
         description: String?
     ) {
         viewModelScope.launch {
@@ -81,7 +93,7 @@ class TransferViewModel(
                         recipientId = recipientId,
                         recipientAccountNumber = recipientAccountNumber,
                         amount = amount,
-                        currencyCode = currencyCode,
+                        currencyId = currencyCode, // Используем код валюты как ID
                         description = description
                     )
                 )
@@ -89,8 +101,11 @@ class TransferViewModel(
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _transferState.value = TransferState.Success(it)
+                        // Обновляем баланс пользователя после успешного перевода
+                        fetchUserProfile()
                     } ?: run {
                         _transferState.value = TransferState.Error("Пустой ответ от сервера")
+                        _errorMessage.value = "Пустой ответ от сервера"
                     }
                 } else {
                     val error = response.errorBody()?.string() ?: "Ошибка перевода"

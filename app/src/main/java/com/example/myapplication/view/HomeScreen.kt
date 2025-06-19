@@ -63,7 +63,7 @@ import java.nio.file.WatchEvent
 @Composable
 fun HomeScreen(  onNavigateToTransfer: () -> Unit,
                  onLogout: () -> Unit,
-    navController: NavController, authViewModel: AuthViewModel = viewModel()) {
+                 navController: NavController, authViewModel: AuthViewModel = viewModel()) {
     val userProfile by authViewModel.userProfile.collectAsState()
     val errorMessage by authViewModel.errorMessage.collectAsState()
 
@@ -391,9 +391,8 @@ fun TransferScreen(
                         selected = selectedCurrency == currency,
                         onClick = { selectedCurrency = currency },
                         modifier = Modifier.padding(end = 8.dp),
-                        label = TODO()
+                        label = { Text(currency) }
                     )
-
                 }
             }
 
@@ -447,13 +446,13 @@ fun TransferScreen(
             }
 
             // Сообщения об ошибках
-            errorMessage?.let { message ->
-                Text(
-                    text = message,
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.padding(top = 16.dp)
-                )
-            }
+//            errorMessage?.let { message ->
+//                Text(
+//                    text = message,
+//                    color = MaterialTheme.colorScheme.error,
+//                    modifier = Modifier.padding(top = 16.dp)
+//                )
+//            }
         }
     }
 }

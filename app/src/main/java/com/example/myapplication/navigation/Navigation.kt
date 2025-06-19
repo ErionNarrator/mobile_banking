@@ -51,23 +51,16 @@ fun Navigate(
         composable("home") {
             HomeScreen(
                 onNavigateToTransfer = { navController.navigate("transfer") },
-                onLogout = {
-                    navController.navigate("login") {
-                        popUpTo("home") { inclusive = true }
-                    }
-                },
+                onLogout = { navController.navigate("login") { popUpTo("home") { inclusive = true } } },
                 authViewModel = authViewModel,
                 navController = navController
             )
         }
 
-            TODO("Отредактировать навигацию с HomeScreen в TransferScreen ")
         composable("transfer") {
             TransferScreen(
                 onBack = { navController.popBackStack() },
-                onTransferSuccess = {
-                    navController.popBackStack()
-                },
+                onTransferSuccess = { navController.popBackStack() },
                 authViewModel = authViewModel
             )
         }
